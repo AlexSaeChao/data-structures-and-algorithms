@@ -12,9 +12,8 @@ Write a function named screenForNames that takes in an array of strings and uses
 
 const screenForNames = (arr) => {
   // Solution code here...
-  const nameRegex = /^(Mr\.|Mrs\.|Ms\.|Dr\.)\s[A-Za-z\s]+$/;
-
-  return arr.filter((name) => nameRegex.test(name));
+  const regex = /^(?:Mr\.|Mrs\.|Ms\.|Dr\.)\s[A-Za-z]+$/;
+  return arr.filter((name) => regex.test(name));
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -27,6 +26,14 @@ For example, ['apple', 'banana', 'MacGyver'] returns ['Apple', 'Banana', 'MacGyv
 
 const toTitleCase = (arr) => {
   // Solution code here...
+
+  return arr.map((str) => {
+    if (str.length === 0) {
+      return str; // Skip empty strings
+    }
+    return str[0].toUpperCase() + str.slice(1);
+  });
+
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -102,6 +109,13 @@ let starWarsData = [{
 
 let biggerThanLuke = (arr) => {
   // Solution code here...
+  const luke = arr.find((character) => character.name === 'Luke Skywalker');
+
+  const names = arr
+    .filter((character) => character.mass !== 'unknown' && parseInt(character.mass) > parseInt(luke.mass))
+    .map((character) => character.name);
+
+  return names.join(' - ');
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -120,6 +134,16 @@ This data could be sorted by name or price.
 
 const sortBy = (property, arr) => {
   // Solution code here...
+
+  return arr.sort((a, b) => {
+    if (a[property] < b[property]) {
+      return -1;
+    }
+    if (a[property] > b[property]) {
+      return 1;
+    }
+    return 0;
+  });
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -136,6 +160,9 @@ https:/missingslash.org returns false because the URL is malformed
 ------------------------------------------------------------------------------------------------ */
 const isSecure = (url) => {
   // Solution code here...
+  const regex = /^https:\/\/(.*)$/;
+  return regex.test(url);
+
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -159,7 +186,34 @@ Here is a sample board:
 
 const detectTicTacToeWin = (board) => {
   // Solution code here...
+  const winningCombinations = [
+    [[0, 0], [0, 1], [0, 2]], // Rows
+    [[1, 0], [1, 1], [1, 2]],
+    [[2, 0], [2, 1], [2, 2]],
+    [[0, 0], [1, 0], [2, 0]], // Columns
+    [[0, 1], [1, 1], [2, 1]],
+    [[0, 2], [1, 2], [2, 2]],
+    [[0, 0], [1, 1], [2, 2]], // Diagonals
+    [[0, 2], [1, 1], [2, 0]]
+  ];
 
+  for (const combination of winningCombinations) {
+    const [coord1, coord2, coord3] = combination;
+    const [row1, col1] = coord1;
+    const [row2, col2] = coord2;
+    const [row3, col3] = coord3;
+
+    const symbol = board[row1][col1];
+    if (
+      symbol !== '' &&
+      symbol === board[row2][col2] &&
+      symbol === board[row3][col3]
+    ) {
+      return true;
+    }
+  }
+
+  return false;
 };
 
 /* ------------------------------------------------------------------------------------------------
