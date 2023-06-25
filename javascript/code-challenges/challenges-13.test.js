@@ -57,7 +57,7 @@ const findHappiness = (arr) => {
 
   for (let i = 0; i < arr.length; i++) {
     if (arr[i].includes(':)')) {
-      result.push(arr[i]); // Add the string to the result array if it contains ":)"
+      result.push(arr[i]);
     }
   }
 
@@ -97,9 +97,11 @@ For example, 'abcdefg' returns 'bdf'
 const onlyOddChars = (str) => {
   // Solution code here...
   let result = '';
+
   for (let i = 1; i < str.length; i += 2) {
     result += str[i];
   }
+
   return result;
 };
 
@@ -112,11 +114,12 @@ Write a function named allHappy that takes in an array of strings and returns a 
 
 const allHappy = (arr) => {
   // Solution code here...
-  for (const str of arr) {
-    if (!str.includes(":)")) {
+  for (let i = 0; i < arr.length; i++) {
+    if (!arr[i].includes(':)')) {
       return false;
     }
   }
+
   return true;
 };
 

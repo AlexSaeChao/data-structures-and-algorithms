@@ -26,12 +26,14 @@ For example, ['apple', 'banana', 'MacGyver'] returns ['Apple', 'Banana', 'MacGyv
 
 const toTitleCase = (arr) => {
   // Solution code here...
+
   return arr.map((str) => {
     if (str.length === 0) {
       return str; // Skip empty strings
     }
     return str[0].toUpperCase() + str.slice(1);
   });
+
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -132,6 +134,7 @@ This data could be sorted by name or price.
 
 const sortBy = (property, arr) => {
   // Solution code here...
+
   return arr.sort((a, b) => {
     if (a[property] < b[property]) {
       return -1;
@@ -159,6 +162,7 @@ const isSecure = (url) => {
   // Solution code here...
   const regex = /^https:\/\/(.*)$/;
   return regex.test(url);
+
 };
 
 /* ------------------------------------------------------------------------------------------------
